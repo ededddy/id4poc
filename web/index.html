@@ -14,18 +14,8 @@
   <script>
 
 
-    const appId = "233726302796525";
     function login() {
-      //const redir = `https://www.facebook.com/v17.0/dialog/oauth?client_id=${appId}&redirect_uri=https://localhost:5500/postAuth.html&state={"{st=state123abc,ds=123456789}"}&response_type=token`
-
-      //const query = `client_id=${appId}`
-      // + `&redirect_uri=https://localhost:5500/postAuth.html`
-      // + `&response_type=code`
-      // + `&state={st=state123abc,ds=123456789}`
-      //const redir = `https://www.facebook.com/v17.0/dialog/oauth?${query}`
-      //const redir = 'https://localhost:5001/External/Challenge?scheme=Facebook&returnUrl=/';
       const redir = "https://localhost:5001/facebook?returnUrl=https://localhost:5500/postAuth.html"
-      //const redir = "https://localhost:5001/facebook?returnUrl=/facebook/test"
       window.location.href = redir;
     }
 
