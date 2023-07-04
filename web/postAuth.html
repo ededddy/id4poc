@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="warn"></div>
+    <div id="redir"></div>
+    <div id="test"></div>
+    <div style="height:20px"></div>
+    <div id="cookies"></div>
+    <div id="token"></div>
+    <button type="button" onclick="logout();">Log out</button>
+    <script async defer>
+        function parseCookie(str) {
+            return
+        }
+
+        // cookie in browser: `pkg=math; equation=E%3Dmc%5E2`
+        // parseCookie(document.cookie);
+        async function logout() {
+            let cookie = document.cookie
+                .split(';')
+                .map(v => v.split('='))
+                .reduce((acc, v) => {
+                    acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
+                    return acc;
+                }, {});
+            document.cookie = '';
+            alert("cookie cleared. token is now gone");
+            window.location.href = "https://localhost:5500/index.html"
+        }
+        async function onLoad() {
+            let param = new URLSearchParams(window.location.search);
+            let token = param.get("tok")
+            if (token == null) {
+                alert("NO Token was returned");
+            }
+
+            document.getElementById("token").innerText = token;
+            document.cookie = `token=${token}`;
+            document.getElementById("cookies", "token is set")
+
+
+            const res = await fetch('https://localhost:7171/api/weatherforecast/gethelloworld', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (!res.ok) {
+                document.getElementById("warn").innerText = `Request failed: ${res.status}`
+                document.getElementById("redir").innerText = res.url
+            } else {
+                const data = await res.json();
+                document.getElementById("test").innerHTML = `<pre>${JSON.stringify(data)}</pre>`
+            }
+        }
+        onLoad();
+    </script>
+</body>
+
+</html>

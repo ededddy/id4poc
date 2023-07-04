@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Facebook Login JavaScript Example</title>
+  <meta charset="UTF-8">
+  <!-- Load the JS SDK asynchronously -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.11.5/oidc-client.min.js"
+    integrity="sha512-pGtU1n/6GJ8fu6bjYVGIOT9Dphaw5IWPwVlqkpvVgqBxFkvdNbytUh0H8AP15NYF777P4D3XEeA/uDWFCpSQ1g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+  <script>
+
+
+    const appId = "233726302796525";
+    function login() {
+      //const redir = `https://www.facebook.com/v17.0/dialog/oauth?client_id=${appId}&redirect_uri=https://localhost:5500/postAuth.html&state={"{st=state123abc,ds=123456789}"}&response_type=token`
+
+      //const query = `client_id=${appId}`
+      // + `&redirect_uri=https://localhost:5500/postAuth.html`
+      // + `&response_type=code`
+      // + `&state={st=state123abc,ds=123456789}`
+      //const redir = `https://www.facebook.com/v17.0/dialog/oauth?${query}`
+      //const redir = 'https://localhost:5001/External/Challenge?scheme=Facebook&returnUrl=/';
+      const redir = "https://localhost:5001/facebook?returnUrl=https://localhost:5500/postAuth.html"
+      //const redir = "https://localhost:5001/facebook?returnUrl=/facebook/test"
+      window.location.href = redir;
+    }
+
+  </script>
+
+
+  <!-- The JS SDK Login Button -->
+
+  <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+  </fb:login-button> -->
+  <button type="button" onclick="login();">Log in</button>
+
+  <div id="status">
+  </div>
+
+</body>
+
+</html>
